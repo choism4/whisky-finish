@@ -47,7 +47,9 @@ whisky-finish는 둘 다 돌려준다. 작업이 끝나면 잔을 채우고, 세
 | 기나긴 마이그레이션 | 셰리 밤 — GlenDronach 15, A'bunadh |
 | 어쩌다 성공한 괴상한 핵 | 괴상한 것 — Octomore, Amrut, Chichibu |
 
-모든 잔은 `.whisky/tab.md` — **바 탭**에 기록된다.
+모든 잔은 **존나 구체적**이다 — 증류소, 익스프레션, 도수, 캐스크 구성, 배치 넘버까지. "적당한 Islay" 같은 건 이 바에 없다. 그리고 모든 잔은 `.whisky/tab.md` — **바 탭**에 기록된다.
+
+위스키 초보라면? 바텐더가 눈높이를 맞춘다. 가쿠빈 하이볼 1:4, 얼음 꽉 채운 롱글라스, 레몬 필 — 하이볼도 정식 서브다.
 
 ### 2. The Bar — 인터랙티브 위스키 상담
 
@@ -80,10 +82,10 @@ whisky-finish는 둘 다 돌려준다. 작업이 끝나면 잔을 채우고, 세
 ## 설치
 
 ```bash
-# 프로젝트 스킬로
-mkdir -p .claude/skills && git clone https://github.com/choism4/whisky-finish .claude/skills/whisky-finish
+# skills CLI로 (권장 — skills.sh 생태계)
+npx skills add choism4/whisky-finish
 
-# 개인 스킬로 (모든 프로젝트에서 바 오픈)
+# 또는 직접 클론 (개인 스킬로, 모든 프로젝트에서 바 오픈)
 git clone https://github.com/choism4/whisky-finish ~/.claude/skills/whisky-finish
 ```
 
