@@ -38,20 +38,11 @@ When a task wraps up, the agent picks a **real, specific bottling** that matches
 >
 > **Verdict:** 92/100. Earned.
 
-The pairings are taken seriously:
+<div align="center"><img src="assets/flight.png" alt="the flight" width="680" /></div>
 
-<div align="center"><img src="assets/flight.png" alt="the pairing flight" width="680" /></div>
+There is no pairing chart. The agent reads the session — the weight of it, the pain, the elegance, how long it dragged — and pours on instinct. A hellish debugging night might land on a peat monster; a clean refactor on something precise and waxy; a weird hack that somehow worked on something equally weird. Or not. That's the bartender's call, and the tasting note is where the call gets defended.
 
-| The work | The pour |
-|---|---|
-| Hellish debugging session | Peat monster Islay — Laphroaig 10, Ardbeg Uigeadail |
-| Elegant refactor | Precise Speyside — Balvenie DoubleWood 12, Clynelish 14 |
-| Lightning hotfix | High-rye — Rittenhouse BiB, Wild Turkey 101 |
-| Greenfield kickoff | Young and spirited — Kilchoman Machir Bay, Arran 10 |
-| Endless migration | Sherry bomb — GlenDronach 15, A'bunadh |
-| Weird hack that somehow worked | Something weird — Octomore, Amrut Fusion, Chichibu |
-
-Every pour is **uncompromisingly specific** — distillery, expression, ABV, cask program, batch number. There is no "some nice Islay" at this bar. And every pour lands on the tab: `.whisky/tab.md`.
+Every pour is still **uncompromisingly specific** — distillery, expression, ABV, cask program. There is no "some nice Islay" at this bar. And every pour lands on the tab: `.whisky/tab.md`.
 
 New to whisky? The bartender meets you where you are. A Kakubin highball 1:4, tall glass packed with ice, lemon peel — a highball is a first-class serve here, not a downgrade.
 

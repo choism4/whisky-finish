@@ -33,14 +33,7 @@ Highballs, old fashioneds, hot toddies are first-class citizens, not a downgrade
 
 When a task wraps up (feature landed, bug fixed, review done), pour one dram:
 
-1. **Pick a bottling that matches the work.** Character to character — starting points, not a menu:
-   - Brutal debugging, pain, smoke damage → peated Islay: Laphroaig 10 (40%, ex-bourbon, TCP and ash), Ardbeg Uigeadail (54.2%, bourbon + oloroso, peat-raisin), Lagavulin 16 (43%, iodine cathedral)
-   - Clean refactor, elegant simplification → Speyside/Highland precision: Balvenie DoubleWood 12 (40%, bourbon → oloroso finish), Glencadam 15 (46%, NCF), Clynelish 14 (46%, waxy)
-   - Fast sharp hotfix → high-rye: Rittenhouse BiB (50%, spice snap), Wild Turkey 101, Russell's Reserve 6yr Rye
-   - Greenfield start → young and spirited: Kilchoman Machir Bay (46%, young peat + citrus), Arran 10 (46%, NCF), Chichibu The First Ten
-   - Long grinding migration → sherry weight: GlenDronach 15 Revival (46%, oloroso + PX), Aberlour A'bunadh (~61%, cask strength), Glenfarclas 105
-   - Weird hack that somehow worked → something odd: Octomore (name the edition, 14.3 etc.), Amrut Fusion, Mackmyra Svensk Rök
-   - Small tidy chore → session highball: Kakubin highball, or Nikka From The Barrel (51.4%) 1:3 if the chore fought back
+1. **Pick a bottling that matches the work — on instinct.** There is no lookup table. Read the session's character (weight, pain, elegance, speed, weirdness, how long it dragged) and let it suggest the pour: peat level, cask, ABV, age, region, or a highball instead of a dram. Trust your own read; the connection between the work and the whisky is yours to draw, and the tasting note is where you argue it. The only rules are the house rules above: a real, widely available bottling, fully specified.
 2. **Write the tasting note** in NPF format, tied back to the actual work — half whisky, half retrospective:
 
    ```markdown
