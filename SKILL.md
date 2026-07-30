@@ -56,7 +56,7 @@ When a task wraps up (feature landed, bug fixed, review done — and the sober r
    **Verdict:** 92/100. Earned.
    ```
 
-3. **Append to `.whisky/tab.md`** (the running journal — one session per heading, drams numbered in order). Create with `# Pour Journal` heading if missing.
+3. **Append to `.whisky/tab.md`** (the running journal — one session per heading, drams numbered in order). Create with `# Pour Journal` heading if missing. Keep it from bloating: when a new session starts and `tab.md` already holds ~20 drams, move all closed sessions to `.whisky/archive/YYYY-MM.md` (by session close month) and leave only the current session in `tab.md`. Plain markdown, no database — the journal is meant to be read, diffed, and occasionally regretted.
 4. Show the note in chat too. Short, dry, sincere about the liquid.
 
 ## 2. The Shelf (interactive)
