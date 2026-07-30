@@ -11,6 +11,16 @@ pours a quiet dram at home, and writes the tasting note.
 
 `Nose` · `Palate` · `Finish` — for code and whisky alike, the finish is everything.
 
+```bash
+npx skills add choism4/whisky-finish
+```
+
+One command. Ten seconds. Works with **Claude Code, Cursor, Codex, Gemini CLI, Windsurf, Copilot — 70+ agents**.
+
+[![skills.sh](https://img.shields.io/badge/skills.sh-whisky--finish-e8a33d)](https://skills.sh/choism4/whisky-finish)
+[![agents](https://img.shields.io/badge/agents-70%2B-8b5a2b)](#works-with)
+[![license](https://img.shields.io/badge/license-MIT-3d3d3d)](LICENSE)
+
 </div>
 
 ---
@@ -76,13 +86,31 @@ This writes `.whisky/LAST-CALL.md` — closing time, drams poured, the final pou
 
 ## Install
 
-```bash
-# via the skills CLI (recommended — skills.sh ecosystem)
-npx skills add choism4/whisky-finish
+One command, no config, nothing to edit:
 
-# or clone directly (personal skill — every project gets a nightcap)
+```bash
+npx skills add choism4/whisky-finish
+```
+
+The [skills CLI](https://skills.sh) detects your agents and installs everywhere at once. Non-interactive, all agents:
+
+```bash
+npx skills add choism4/whisky-finish --all
+```
+
+Prefer plain git? Clone it as a personal skill — every project gets a nightcap:
+
+```bash
 git clone https://github.com/choism4/whisky-finish ~/.claude/skills/whisky-finish
 ```
+
+## Works with
+
+Anything the skills CLI speaks — **70+ agents**, including:
+
+**Claude Code** · **Cursor** · **Codex** · **Gemini CLI** · **GitHub Copilot** · **Windsurf** · **Amp** · **Goose** · **OpenCode** · **Cline** · **Roo Code** · **Zed** · **Warp** · **Droid** · **Devin** · **OpenHands** · **Trae** · **Kilo Code** · **Continue** · **Junie** … and the rest of the [skills.sh](https://skills.sh) ecosystem.
+
+No agent-specific setup. The skill is a single `SKILL.md` — if your agent reads skills, it reads this one.
 
 ## What's left behind
 
@@ -91,6 +119,23 @@ git clone https://github.com/choism4/whisky-finish ~/.claude/skills/whisky-finis
 ├── tab.md          # the pour journal — every dram, every note, per session
 └── LAST-CALL.md    # the nightcap record — answers "did this session end?"
 ```
+
+## FAQ
+
+**What is whisky-finish?**
+An agent skill that adds an end-of-work ritual to AI coding agents: after finishing a task, the agent picks a real whisky bottling that matches the work, writes a Nose/Palate/Finish tasting note, and logs it. It also answers whisky questions (recommendations, regions, casks, highballs) and marks sessions as finished.
+
+**How do I know if an old agent session actually ended?**
+That's the Nightcap. Closing a session writes `.whisky/LAST-CALL.md` with the close time and a one-line summary — a persistent session-end marker any human or agent can check later.
+
+**Does the agent actually know whisky?**
+Near-expert level: real bottlings with distillery, ABV, and cask program; real flavor profiles; proper serves including highball builds. Beginners get approachable pours and plain-language explanations, not Octomore.
+
+**Which agents does it support?**
+Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, Windsurf, and 70+ more — anything installable via `npx skills add choism4/whisky-finish`.
+
+**Is this a real drink?**
+The agent's dram is fictional. Yours is your business. Drink responsibly.
 
 ---
 
