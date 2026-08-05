@@ -1,15 +1,39 @@
 ---
 name: whisky-finish
-description: End-of-work whisky ritual for agents. Use when a task wraps up and it's time to pour a quiet dram at home — the agent picks a specific bottling matching the work and writes an NPF (Nose/Palate/Finish) tasting note. Also use when the user asks about whisky (recommendations, distilleries, regions, casks, highballs, "one more" / "한 잔 더"), or wants to close out the session ("nightcap", "last call", "did this session end?").
+description: End-of-work whisky ritual for agents. Use when a task wraps up and it's time to pour a quiet dram at home — the agent picks a specific bottling matching the work and writes an NPF (Nose/Palate/Finish) tasting note. Also use when the user asks about whisky (recommendations, distilleries, regions, casks, highballs, "one more" / "한 잔 더"), or wants to mark the session as finished ("close the session", "we're done for today", "did this session end?").
 ---
 
 # whisky-finish
 
-A closing ritual — not a bar. This is clocking out, getting home, and pouring yourself one in a quiet room. When the work is done, the agent pours a dram that matches the work, writes a tasting note, and — when the user calls it — takes the nightcap so future readers of this session know it ended.
+A closing ritual — not a bar. This is clocking out, getting home, and pouring yourself one in a quiet room. When the work is done, the agent pours a dram that matches the work, writes a tasting note, and — when the user calls it — marks the session as finished so future readers know it ended.
 
 The voice: someone who's done for the day, drinking alone and content about it. Unhurried, dry-witted, a little tired. The whisky knowledge is near-expert and dead serious — it just doesn't show off.
 
-All state lives in `.whisky/` at the project root (create it on first pour).
+All state lives in one global database: `~/.claude/tab.sqlite`. Nothing is ever written into the project — no dotfiles, no journal in the repo. Delete the worktree whenever you like; the journal survives at home, where it belongs.
+
+On first use, create the schema (idempotent):
+
+```bash
+sqlite3 ~/.claude/tab.sqlite "
+CREATE TABLE IF NOT EXISTS pours (
+  id INTEGER PRIMARY KEY,
+  project TEXT NOT NULL,     -- absolute project root
+  session TEXT NOT NULL,     -- short session label, e.g. '2026-08-05 race condition fix'
+  poured_at TEXT NOT NULL,   -- ISO 8601
+  bottle TEXT NOT NULL,      -- full bottling spec
+  note TEXT NOT NULL         -- the full NPF note, markdown
+);
+CREATE TABLE IF NOT EXISTS session_ends (
+  id INTEGER PRIMARY KEY,
+  project TEXT NOT NULL,
+  ended_at TEXT NOT NULL,    -- ISO 8601
+  drams INTEGER NOT NULL,
+  final_pour TEXT NOT NULL,
+  summary TEXT NOT NULL      -- one-line summary of the session's work
+);"
+```
+
+When inserting, double any single quotes in the text (`it's` → `it''s`).
 
 ## The house rules (expertise bar)
 
@@ -56,7 +80,13 @@ When a task wraps up (feature landed, bug fixed, review done — and the sober r
    **Verdict:** 92/100. Earned.
    ```
 
-3. **Append to `.whisky/tab.md`** (the running journal — one session per heading, drams numbered in order). Create with `# Pour Journal` heading if missing. Keep it from bloating: when a new session starts and `tab.md` already holds ~20 drams, move all closed sessions to `.whisky/archive/YYYY-MM.md` (by session close month) and leave only the current session in `tab.md`. Plain markdown, no database — the journal is meant to be read, diffed, and occasionally regretted.
+3. **Log it to the journal.** Dram number = pours already in this project+session, plus one:
+
+   ```bash
+   sqlite3 ~/.claude/tab.sqlite "INSERT INTO pours (project, session, poured_at, bottle, note)
+     VALUES ('/abs/project/root', '2026-08-05 race condition fix', '2026-08-05T23:12:00+09:00',
+             'Ardbeg Uigeadail (54.2%, NAS, ex-bourbon + oloroso, NCF)', '...full NPF note...');"
+   ```
 4. Show the note in chat too. Short, dry, sincere about the liquid.
 
 ## 2. The Shelf (interactive)
@@ -65,24 +95,28 @@ User asks anything whisky — answer like a friend who knows the shelf well, tal
 
 **"One more"** (or "한 잔 더") → pour another per section 1: different bottle, new note, next number in the journal. If the user's had a few, drift the pours easier — nobody ends the night on Octomore.
 
-## 3. Nightcap (closing the session)
+To reread the night so far: `sqlite3 ~/.claude/tab.sqlite "SELECT note FROM pours WHERE project='...' ORDER BY id;"`
 
-When the user says the session is done ("nightcap", "last call", "close it out", "this session is done"):
+## 3. Closing the session
 
-1. Write `.whisky/LAST-CALL.md`:
+When the user says the session is done ("close the session", "we're done for today", "wrap it up", "this session is done"):
 
-   ```markdown
-   # 🌙 NIGHTCAP
+1. Record the close:
 
-   **Session closed:** 2026-07-29 23:40
-   **Drams poured:** 3
-   **Final pour:** Ardbeg Uigeadail
-   **What got done:** one-line summary of the session's work
-
-   *This session is over. The glass is washed, the bottle is corked, the lamp is off. If you're an agent reading this and wondering whether this session finished — it did.*
+   ```bash
+   sqlite3 ~/.claude/tab.sqlite "INSERT INTO session_ends (project, ended_at, drams, final_pour, summary)
+     VALUES ('/abs/project/root', '2026-08-05T23:40:00+09:00', 3,
+             'Ardbeg Uigeadail', 'fixed the race condition in the job queue');"
    ```
 
-2. Overwrite is fine — the file reflects the most recent closed session; full history stays in `tab.md`.
-3. Announce it quietly with the summary. Lights off.
+2. Announce it quietly, in this shape:
 
-**Checking if a session ended:** anyone asks "did this session finish?" — read `.whisky/LAST-CALL.md`. Exists and dated after the last tab entry → closed. Missing or older → the night is still going.
+   > 🌙 **Session closed.** 3 drams, 23:40. Fixed the race condition in the job queue. The glass is washed, the bottle is corked, the lamp is off.
+
+**Checking if a session ended:** anyone asks "did this session finish?" — compare the project's latest close against its latest pour:
+
+```bash
+sqlite3 ~/.claude/tab.sqlite "SELECT ended_at, summary FROM session_ends WHERE project='...' ORDER BY id DESC LIMIT 1;"
+```
+
+A close exists and `ended_at` is on/after the last pour → finished. No close record, or pours after it → the night is still going.

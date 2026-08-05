@@ -50,7 +50,7 @@ When a task wraps up, the agent picks a **real, specific bottling** that matches
 
 There is no pairing chart. The agent reads the session — the weight of it, the pain, the elegance, how long it dragged — and pours on instinct. A hellish debugging night might land on a peat monster; a clean refactor on something precise and waxy; a weird hack that somehow worked on something equally weird. Or not. That's the pourer's call, and the tasting note is where the call gets defended.
 
-Every pour is still **uncompromisingly specific** — distillery, expression, ABV, cask program. There is no "some nice Islay" on this shelf. And every pour lands in the journal: `.whisky/tab.md`.
+Every pour is still **uncompromisingly specific** — distillery, expression, ABV, cask program. There is no "some nice Islay" on this shelf. And every pour lands in the journal: one global `~/.claude/tab.sqlite`, never your repo.
 
 New to whisky? It meets you where you are. A Kakubin highball 1:4, tall glass packed with ice, lemon peel — a highball is a first-class serve here, not a downgrade.
 
@@ -68,19 +68,19 @@ Regions, distilleries, cask chemistry, entry-level ladders, how to read a label 
 > one more
 ```
 
-### 3. Nightcap — closing the session
+### 3. Closing the session — mark it finished
 
-<div align="center"><img src="assets/nightcap.png" alt="nightcap" width="680" /></div>
+<div align="center"><img src="assets/nightcap.png" alt="closing the session" width="680" /></div>
 
 Run enough sessions and it gets blurry. *Is this one... finished?*
 
 Now the night has a proper end:
 
 ```
-> nightcap
+> close the session
 ```
 
-This writes `.whisky/LAST-CALL.md` — closing time, drams poured, the final pour, and a one-line summary of what got done. Later, when anyone (human or agent) asks whether this session ended, that file answers.
+This records the close — time, drams poured, the final pour, and a one-line summary of what got done — in the journal. Later, when anyone (human or agent) asks whether this session ended, the journal answers.
 
 > *This session is over. The glass is washed, the bottle is corked, the lamp is off.*
 
@@ -98,7 +98,7 @@ The [skills CLI](https://skills.sh) detects your agents and installs everywhere 
 npx skills add choism4/whisky-finish --all
 ```
 
-Prefer plain git? Clone it as a personal skill — every project gets a nightcap:
+Prefer plain git? Clone it as a personal skill — every project gets the ritual:
 
 ```bash
 git clone https://github.com/choism4/whisky-finish ~/.claude/skills/whisky-finish
@@ -114,11 +114,13 @@ No agent-specific setup. The skill is a single `SKILL.md` — if your agent read
 
 ## What's left behind
 
+**Nothing in your repo.** All state lives in one global journal:
+
 ```
-.whisky/
-├── tab.md          # the pour journal — every dram, every note, per session
-└── LAST-CALL.md    # the nightcap record — answers "did this session end?"
+~/.claude/tab.sqlite    # every pour, every note, every session close — across all projects
 ```
+
+No dotfiles, no journal committed by accident, nothing to `.gitignore`. Delete a worktree the moment you're done with it — the night it held stays on the record.
 
 ## FAQ
 
@@ -126,7 +128,7 @@ No agent-specific setup. The skill is a single `SKILL.md` — if your agent read
 An agent skill that adds an end-of-work ritual to AI coding agents: after finishing a task, the agent picks a real whisky bottling that matches the work, writes a Nose/Palate/Finish tasting note, and logs it. It also answers whisky questions (recommendations, regions, casks, highballs) and marks sessions as finished.
 
 **How do I know if an old agent session actually ended?**
-That's the Nightcap. Closing a session writes `.whisky/LAST-CALL.md` with the close time and a one-line summary — a persistent session-end marker any human or agent can check later.
+Say "close the session" — the skill records the close time and a one-line summary in the global journal (`~/.claude/tab.sqlite`), a persistent session-end marker any human or agent can check later, keyed by project path.
 
 **Does the agent actually know whisky?**
 Near-expert level: real bottlings with distillery, ABV, and cask program; real flavor profiles; proper serves including highball builds. Beginners get approachable pours and plain-language explanations, not Octomore.
