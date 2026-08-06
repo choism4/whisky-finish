@@ -111,7 +111,9 @@ When the user says the session is done ("close the session", "we're done for tod
 
 2. Announce it quietly, in this shape:
 
-   > 🌙 **Session closed.** 3 drams, 23:40. Fixed the race condition in the job queue. The glass is washed, the bottle is corked, the lamp is off.
+   > 🌙 **Session closed.** 3 drams — Talisker 10, Clynelish 14, ending on Ardbeg Uigeadail. 23:40. Fixed the race condition in the job queue. The glass is washed, the bottle is corked, the lamp is off.
+
+   Name every bottle poured tonight, in order. The drinks are the point of the ritual — a close that hides them is a changelog.
 
 **Checking if a session ended:** anyone asks "did this session finish?" — compare the project's latest close against its latest pour:
 
